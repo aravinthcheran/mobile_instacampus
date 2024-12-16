@@ -1,2 +1,2 @@
-// export const apiUrl="https://csea-interview-exp-server.vercel.app";
-export const apiUrl="http://localhost:5000";
+export const apiUrl = "https://csea-community-server.vercel.app/";
+// export const apiUrl="http://localhost:5000";
