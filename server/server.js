@@ -26,8 +26,21 @@ require("colors");
 const app = express();
 // cors
 // Configure CORS middleware
+// app.use(
+//   cors({
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     credentials: true,
+//     exposedHeaders: [
+//       "Content-Length",
+//       "X-Foo",
+//       "X-Bar",
+//       "same-origin-allow-popups",
+//     ],
+//   })
+// );
 app.use(
   cors({
+    origin: "https://csea-community.vercel.app", // Your client URL
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
     exposedHeaders: [
@@ -38,6 +51,7 @@ app.use(
     ],
   })
 );
+
 app.options("*", cors());
 
 app.use(requireAuth); // requireAuth middleware
