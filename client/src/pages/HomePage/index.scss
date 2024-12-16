@@ -1,0 +1,139 @@
+
+
+.home-page-container {
+    padding : 0px 2%;
+    overflow: hidden;
+    a:hover {
+        text-decoration: none;
+    }
+
+    .carousel-control-prev-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23565656' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+    }
+    
+    .carousel-control-next-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23565656' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+    }
+
+    .company-list{
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: 80vh;
+    }
+    .company-list::-webkit-scrollbar, .recentArticleCards::-webkit-scrollbar{
+        width: 5px;
+    }
+
+    .company-list::-webkit-scrollbar-track,.recentArticleCards::-webkit-scrollbar {
+        box-shadow: transparent; 
+        border-radius: 10px;
+      }
+       
+    .company-list::-webkit-scrollbar-thumb,.recentArticleCards::-webkit-scrollbar{
+        background:  rgb(170,170,170); 
+        border-radius: 10px;
+    }
+      
+    .company-list::-webkit-scrollbar-thumb:hover,.recentArticleCards::-webkit-scrollbar {
+        background: transparent; 
+    }
+
+    .recentArticleCards{
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: 80vh;
+    }
+
+    @media (max-width:768px){
+        .company-list{
+            overflow: hidden;
+            height: auto;
+        }
+    }
+
+    .header-title{
+        text-align: center;
+        font-size: 20px;
+        font-family: 'Kumar One';
+        color:#002C89;
+        word-spacing: 6px;
+    }
+
+    .homepagePara{
+        font-size: 0.9rem;
+        margin-top: 8px;
+        width: 90%;
+    }
+
+    @media (max-width:768px){
+        .homepagePara{
+            font-size: 0.75rem;
+            width: 85%;
+        }
+    }
+
+    .carousel-item {
+        padding: 0px 15%;
+    }
+
+    .company-list {
+        .title-bar{
+            width: 300px;
+            margin:4px auto;
+            align-content: center;
+            .title{
+            
+            font-size: 16px;
+            font-weight: 600;
+            }
+            a{
+                font-size: 14px;
+                text-decoration: underline;
+            }
+        }
+        .list-box {
+            flex:none;
+            width: 300px;
+            min-height: 40px;
+            background: #FFFFFF;
+            border-radius: 6px;
+            font-size: 16px;
+            border: 0px;
+            margin: 8px 0px;
+            font-weight: 400;
+
+            &:hover {
+                z-index: 1;
+                background-color: #f8f9fa;
+            }
+
+            img{
+                width:30px;
+            }
+        }
+    }
+
+    .hide-for-small{
+        @media (max-width:768px) {
+            display: none;
+        }
+    }
+
+    .companyLogoImg{
+        transform: translateX(-8px);
+    }
+
+    .btn-primary {
+        background-color: black;
+        border-color: black;
+        transition: background-color 0.3s ease;
+        &:hover {
+            color: white;
+            background-color: rgb(37, 37, 37);
+            border-color: rgb(37, 37, 37);
+        }
+    }
+
+}
+
+

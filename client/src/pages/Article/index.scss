@@ -1,0 +1,40 @@
+.article-content {
+  .article-body {
+    background-color:antiquewhite;
+    padding-bottom: 56px;
+    .content-heading {
+      color: rgba(86, 86, 86, 1);
+      
+      font-size: 1.8rem;
+      font-weight: 800;
+      
+    }
+
+    .content-author-detail {
+      font-size: 0.8rem;
+      color: rgba(114, 114, 114, 1);
+    }
+
+    .tags{
+      margin : 5px 10px;
+      align-self: flex-end;
+      font-size: 16px;
+      & > *{
+          margin-right: 5px;
+      }
+  }
+  }
+}
+
+.article-post {
+  font-family: Merriweather;
+  font-size: 1rem;
+  line-height: 1.8;
+  overflow: hidden;
+  color: rgba(0, 0, 0, .8);
+}
+
+.article-post p,
+.article-post blockquote {
+  margin: 0 0 0.4rem 0;
+}

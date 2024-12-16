@@ -1,0 +1,110 @@
+.login-holder {
+  display: flex;
+  flex-direction: column; /* Ensures vertical stacking of .login and .signup */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  // background-color: #f0f4f8; /* Light background for the page */
+  padding: 20px;
+}
+
+.login, .signup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5; /* Maintained theme color */
+  width: 40%;
+  border-radius: 10px;
+  padding: 2rem; /* Increased padding for better spacing */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Added shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+.login:hover, .signup:hover {
+  transform: translateY(-5px); /* Slight lift effect on hover */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+.login h3, .signup h3 {
+  font-size: 24px;
+  margin-bottom: 1rem;
+  color: #333;
+  font-family: 'Arial', sans-serif;
+}
+
+.login label, .signup label {
+  align-self: flex-start;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #666;
+  font-weight: bold;
+}
+
+.login input, .signup input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login input:focus, .signup input:focus {
+  border-color: #3182ce; /* Blue accent for input focus */
+  box-shadow: 0 0 5px rgba(49, 130, 206, 0.5); /* Subtle shadow for focus */
+  outline: none;
+}
+
+.login button, .signup button {
+  width: 100%; /* Changed from 100% to auto for reduced size */
+  padding: 8px 16px; /* Reduced padding for smaller button */
+  background-color: #3182ce; /* Maintained theme color */
+  color: white;
+  font-size: 14px; /* Reduced font size */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px; /* Added margin-top for spacing */
+}
+
+.login button:hover, .signup button:hover {
+  background-color: #2c5282; /* Slightly darker shade for hover effect */
+}
+
+.login button:disabled, .signup button:disabled {
+  background-color: #a0aec0;
+  cursor: not-allowed;
+}
+
+.login p, .signup p {
+  color: #e53e3e; /* Red color for error messages */
+  font-size: 14px;
+  margin-top: 0.5rem;
+}
+
+.signup {
+  margin-top: 20px; /* Add margin to separate .signup from .login */
+  width: 40%; /* Match the width of the login */
+  padding: 2rem; /* Consistent padding */
+  background-color: #f5f5f5; /* Maintained theme color */
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (max-width: 830px) {
+  .login, .signup {
+      width: 90%; /* Full width on smaller screens */
+  }
+
+  .login-holder {
+      flex-direction: column; /* This ensures the login and signup stack vertically */
+  }
+}

@@ -1,0 +1,38 @@
+[
+	{
+		"id": 1,
+		"name": "Aravinth Cheran K S",
+		"img": "https://media.licdn.com/dms/image/v2/D5603AQE_9mbyq6-Fmg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1728641835703?e=2147483647&v=beta&t=_m5eUvhljpp1XwadJzADF12FgZ1YM1u1AWOFRMle2GY",
+		"designation": "Super Secretary",
+		"githubLink": "https://github.com/arkumish",
+		"instagramLink": "https://www.instagram.com/",
+		"linkedinLink": "https://www.linkedin.com/in"
+	},
+	{
+		"id": 2,
+		"name": "Bragadeesh V",
+		"img": "https://media.licdn.com/dms/image/v2/D5603AQHhdvh33Y6zOw/profile-displayphoto-shrink_400_400/B56ZOXhAqxGsAk-/0/1733413834418?e=1738800000&v=beta&t=bJQZpwx9k1Cx2ncmzEHKQP7_JbHSrC5Qth31Nl4LlPk",
+		"designation": "Secretary",
+		"githubLink": "https://github.com/bragadeesh2005",
+		"instagramLink": "https://www.linkedin.com/in/bragadeesh05/",
+		"linkedinLink": "https://www.linkedin.com/in/bragadeesh05/"
+	},
+	{
+		"id": 3,
+		"name": "Hemanthkumar V",
+		"img": "https://media.licdn.com/dms/image/v2/D5603AQFUSRa1ydLRcQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1727024332658?e=1738800000&v=beta&t=lvPVv4DUbjYfXkRHC8QF9qP8dLkr8dJ2gIkSFVaC4nY",
+		"designation": "Tech Head",
+		"githubLink": "https://github.com/Hemanth-5",
+		"instagramLink": "https://www.instagram.com/_.hemanth_kumar_/",
+		"linkedinLink": "https://www.linkedin.com/in/hemanth-kumar-2a6321224/"
+	},
+	{
+		"id": 4,
+		"name": "Mithilesh",
+		"img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB9zkCzBP1uYLf0CoWx_nOwkq3L2H0cVbsF1JKH5xPOw&s",
+		"designation": "Joint Secretary",
+		"githubLink": "https://github.com/Akashsaxena2308",
+		"instagramLink": "https://www.instagram.com/akash_saxena_23/",
+		"linkedinLink": "https://www.linkedin.com/in/akash-saxena-372a9318b/"
+	}
+]
