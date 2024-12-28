@@ -38,21 +38,23 @@ const app = express();
 //     ],
 //   })
 // );
-app.use(
-  cors({
-    origin: "https://csea-community.vercel.app", // Your client URL
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-    exposedHeaders: [
-      "Content-Length",
-      "X-Foo",
-      "X-Bar",
-      "same-origin-allow-popups",
-    ],
-  })
-);
+// app.use(
+//   cors({
+//     origin: "https://csea-community.vercel.app", // Your client URL
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     credentials: true,
+//     exposedHeaders: [
+//       "Content-Length",
+//       "X-Foo",
+//       "X-Bar",
+//       "same-origin-allow-popups",
+//     ],
+//   })
+// );
 
-app.options("*", cors());
+// app.options("*", cors());
+app.use(cors());
+
 
 app.use(requireAuth); // requireAuth middleware
 // Body Parser
