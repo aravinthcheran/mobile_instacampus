@@ -121,10 +121,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Logout function
   const logout = async () => {
     try {
+      // Clear user data
       setUser(null);
       setToken(null);
+      
+      // Clear stored data
+      await storage.removeItem('user');
+      await storage.removeItem('authToken');
+      
+      // Optional: Clear any other user-related data
+      await storage.removeItem('userSubscriptions');
+      
+      console.log('Logged out successfully');
+      
+      // Navigate to login page
       router.replace('/auth/login');
     } catch (error) {
+      console.error('Error during logout:', error);
       Alert.alert('Logout Error', 'Failed to logout properly');
     }
   };

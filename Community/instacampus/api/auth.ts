@@ -1,7 +1,7 @@
 // Authentication API functions
 import { storage } from '@/utils/storage';
 
-const API_URL = 'http://localhost:5000'; // Replace with your actual API URL
+const API_URL = 'https://jr3qx5z4-5000.inc1.devtunnels.ms/'; // Replace with your actual API URL
 
 // Send OTP to email
 export async function sendOtp(email: string): Promise<void> {

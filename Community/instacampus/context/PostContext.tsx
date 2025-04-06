@@ -37,11 +37,37 @@ export function PostProvider({ children }: { children: ReactNode }) {
     try {
       setIsLoading(true);
       setError(null);
-      const postsData = await fetchPosts(searchQuery);
+      
+      // Add error catching and timeout
+      const fetchPromise = fetchPosts(searchQuery);
+      const timeoutPromise = new Promise<Post[]>((_, reject) => 
+        setTimeout(() => reject(new Error('Request timed out')), 10000)
+      );
+      
+      // Race between fetch and timeout
+      const postsData = await Promise.race([fetchPromise, timeoutPromise]);
+      
+      // If we get here, we have posts data
       setPosts(postsData);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load posts');
       console.error('Error loading posts:', err);
+      setError(err instanceof Error ? err.message : 'Failed to load posts');
+      
+      // If in dev mode, set mock data instead of showing error
+      if (__DEV__) {
+        setPosts([
+          {
+            _id: 'mock1',
+            event_name: 'Development Mode Event',
+            caption: 'This is a mock event shown because the API is unavailable',
+            created_at: new Date().toISOString(),
+            user_name: 'Dev Mode',
+            user_email: 'dev@example.com',
+            likes: [],
+            comments: []
+          }
+        ]);
+      }
     } finally {
       setIsLoading(false);
     }

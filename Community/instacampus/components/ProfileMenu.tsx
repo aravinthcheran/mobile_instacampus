@@ -1,34 +1,34 @@
-import { Tabs } from 'expo-router';
 import React, { useState } from 'react';
-import { Platform, StyleSheet, View, TouchableOpacity, Modal, Image } from 'react-native';
+import { StyleSheet, TouchableOpacity, Modal, Image, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 
-import { HapticTab } from '@/components/HapticTab';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { useAuth } from '@/context/AuthContext';
 
-// Inline ProfileMenu component to avoid creating a new file
-function ProfileMenu() {
+export function ProfileMenu() {
   const { user, logout } = useAuth();
   const [menuVisible, setMenuVisible] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuVisible(!menuVisible);
+  };
 
   const handleLogout = async () => {
     await logout();
     setMenuVisible(false);
+    router.replace('/auth/login');
   };
+
+  // Default profile image if none available
+  const profileImage = user?.profilePic || 'https://via.placeholder.com/40';
 
   return (
     <>
-      <TouchableOpacity 
-        onPress={() => setMenuVisible(true)} 
-        style={styles.profileButton}
-      >
+      <TouchableOpacity onPress={toggleMenu} style={styles.profileButton}>
         {user?.profilePic ? (
-          <Image source={{ uri: user.profilePic }} style={styles.profileImage} />
+          <Image source={{ uri: profileImage }} style={styles.profileImage} />
         ) : (
           <View style={styles.profilePlaceholder}>
             <ThemedText style={styles.profileInitial}>
@@ -50,9 +50,12 @@ function ProfileMenu() {
           onPress={() => setMenuVisible(false)}
         >
           <ThemedView style={styles.menuContainer}>
-            <View style={styles.userInfoSection}>
+            <TouchableOpacity 
+              style={styles.userInfoSection}
+              activeOpacity={1}
+            >
               {user?.profilePic ? (
-                <Image source={{ uri: user.profilePic }} style={styles.menuProfileImage} />
+                <Image source={{ uri: profileImage }} style={styles.menuProfileImage} />
               ) : (
                 <View style={styles.menuProfilePlaceholder}>
                   <ThemedText style={styles.menuProfileInitial}>
@@ -69,7 +72,7 @@ function ProfileMenu() {
                   {user?.email || 'user@example.com'}
                 </ThemedText>
               </View>
-            </View>
+            </TouchableOpacity>
 
             <View style={styles.divider} />
 
@@ -84,101 +87,9 @@ function ProfileMenu() {
   );
 }
 
-// App logo/title component
-function AppLogo() {
-  return (
-    <View style={styles.logoContainer}>
-      <ThemedText style={styles.logoText}>InstaCampus</ThemedText>
-    </View>
-  );
-}
-
-export default function TabLayout() {
-  return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors.tint,
-        headerShown: true,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        // Remove the centered title
-        headerTitle: () => null,
-        // Add logo/app name to the left
-        headerLeft: () => <AppLogo />,
-        // Keep profile menu on the right
-        headerRight: () => <ProfileMenu />,
-        // Style header consistently across platforms
-        headerStyle: {
-          backgroundColor: '#ffffff',
-          ...Platform.select({
-            android: {
-              elevation: 4,
-            },
-            ios: {
-              shadowColor: '#000',
-              shadowOpacity: 0.1,
-              shadowRadius: 1,
-              shadowOffset: { width: 0, height: 1 },
-            },
-            web: {
-              boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-            }
-          }),
-        },
-        // Add proper container padding
-        headerLeftContainerStyle: {
-          paddingLeft: 16,
-        },
-        headerRightContainerStyle: {
-          paddingRight: 16,
-        },
-        tabBarStyle: {
-          // Keep bottom tab bar styling consistent across platforms
-          ...Platform.select({
-            ios: {
-              position: 'absolute',
-            },
-            android: {
-              elevation: 8,
-            },
-            default: {},
-          }),
-        },
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <Ionicons name="home" size={24} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <Ionicons name="compass" size={24} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="upload"
-        options={{
-          title: 'Create',
-          tabBarIcon: ({ color }) => <Ionicons name="add-circle" size={24} color={color} />,
-          // Override any screen-specific settings that could hide the header
-          headerShown: true,
-        }}
-      />
-    </Tabs>
-  );
-}
-
 const styles = StyleSheet.create({
-  headerTitle: {
-    fontSize: 20,
-    color: '#0a7ea4',
-  },
   profileButton: {
-    padding: 8,
+    marginRight: 15,
   },
   profileImage: {
     width: 36,
@@ -194,6 +105,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#0a7ea4',
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
   },
   profileInitial: {
     color: 'white',
@@ -268,14 +181,5 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     color: '#e74c3c',
     fontSize: 16,
-  },
-  logoContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  logoText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#0a7ea4',
   },
 });

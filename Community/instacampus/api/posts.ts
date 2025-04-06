@@ -1,7 +1,7 @@
 import { storage } from '@/utils/storage';
 import { Platform } from 'react-native';
 
-const API_URL = 'http://localhost:5000'; // Replace with your actual API URL
+const API_URL = 'https://jr3qx5z4-5000.inc1.devtunnels.ms'; // Replace with your actual API URL
 
 // Ensure filename has valid extension
 function ensureValidFileExtension(filename: string): string {

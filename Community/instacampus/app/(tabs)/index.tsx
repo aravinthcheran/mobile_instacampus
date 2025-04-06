@@ -12,6 +12,20 @@ import { PostCard } from '@/components/PostCard';
 
 const API_URL = 'http://localhost:5000';
 
+// Function to handle long usernames in post headers
+const formatPostAuthorName = (name: string = 'Unknown') => {
+  return (
+    <ThemedText 
+      type="defaultSemiBold" 
+      style={styles.authorName}
+      numberOfLines={1}
+      ellipsizeMode="tail"
+    >
+      {name}
+    </ThemedText>
+  );
+};
+
 export default function HomeScreen() {
   const { posts, isLoading, error, loadPosts } = usePosts();
   const { user, token } = useAuth();
@@ -240,31 +254,42 @@ export default function HomeScreen() {
     
     return (
       <ThemedView style={styles.postCard}>
-        {/* Post Header */}
+        {/* Post Header with Author Info and Subscribe Button */}
         <ThemedView style={styles.postHeader}>
-          <ThemedView style={styles.postAuthor}>
+          {/* Author Info */}
+          <ThemedView style={styles.authorContainer}>
+            {/* Author Avatar */}
             {item.user_profile_pic ? (
               <Image source={{ uri: item.user_profile_pic }} style={styles.authorImage} />
             ) : (
-              <ThemedView style={styles.authorInitial}>
-                <ThemedText>{(item.user_name || 'U')[0].toUpperCase()}</ThemedText>
+              <ThemedView style={styles.authorPlaceholder}>
+                <ThemedText>{item.user_name ? item.user_name[0].toUpperCase() : 'U'}</ThemedText>
               </ThemedView>
             )}
-            <ThemedView>
-              <ThemedText type="defaultSemiBold">{item.user_name || 'Unknown'}</ThemedText>
-              <ThemedText style={styles.dateText}>{new Date(item.created_at).toLocaleDateString()}</ThemedText>
+            
+            {/* Author Name and Post Date */}
+            <ThemedView style={styles.authorInfo}>
+              {formatPostAuthorName(item.user_name)}
+              <ThemedText style={styles.dateText}>
+                {new Date(item.created_at).toLocaleDateString()}
+              </ThemedText>
             </ThemedView>
           </ThemedView>
           
-          {/* Subscribe Button */}
+          {/* Subscribe Button with Bell Icon - Only show if not the current user's post */}
           {user && user.email !== item.user_email && (
-            <TouchableOpacity
-              style={[styles.subscribeButton, isSubscribed ? styles.subscribedButton : {}]}
+            <TouchableOpacity 
+              style={[
+                styles.subscribeButton,
+                isSubscribed ? styles.subscribedButton : styles.unsubscribedButton
+              ]}
               onPress={() => handleSubscription(item._id)}
             >
-              <ThemedText style={isSubscribed ? styles.subscribedText : styles.subscribeText}>
-                {isSubscribed ? 'Subscribed' : 'Subscribe'}
-              </ThemedText>
+              <Ionicons 
+                name={isSubscribed ? "notifications" : "notifications-outline"} 
+                size={18} 
+                color={isSubscribed ? "white" : "#0a7ea4"} 
+              />
             </TouchableOpacity>
           )}
         </ThemedView>
@@ -475,12 +500,24 @@ const styles = StyleSheet.create({
   postHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 10,
+    alignItems: 'flex-start',
+    marginBottom: 15,
   },
-  postAuthor: {
+  authorContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    flex: 1,
+    marginRight: 10,
+  },
+  authorInfo: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingRight: 10, // Increased to give more space between text and bell icon
+    maxWidth: '85%',  // Ensure it doesn't push too close to the bell icon
+  },
+  authorName: {
+    fontSize: 14,     // Slightly reduced font size to fit more text
+    lineHeight: 20,
   },
   authorImage: {
     width: 40,
@@ -488,7 +525,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginRight: 10,
   },
-  authorInitial: {
+  authorPlaceholder: {
     width: 40,
     height: 40,
     borderRadius: 20,
@@ -623,21 +660,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   subscribeButton: {
+    padding: 8,
+    borderRadius: 20,  // More rounded for a bell icon
+    alignSelf: 'flex-start',
     borderWidth: 1,
     borderColor: '#0a7ea4',
-    paddingVertical: 4,
-    paddingHorizontal: 10,
-    borderRadius: 4,
-  },
-  subscribeText: {
-    color: '#0a7ea4',
-    fontSize: 12,
+    marginLeft: 5,
   },
   subscribedButton: {
     backgroundColor: '#0a7ea4',
   },
-  subscribedText: {
-    color: 'white',
-    fontSize: 12,
+  unsubscribedButton: {
+    backgroundColor: 'transparent',
   },
 });
